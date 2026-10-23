@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/gold",
+      "destination": "https://hq.sinajs.cn/list=gds_AUTD"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/gold",
+      "headers": [
+        { "key": "Referer", "value": "https://finance.sina.com.cn" }
+      ]
+    }
+  ]
+}
