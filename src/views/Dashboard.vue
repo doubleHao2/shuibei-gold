@@ -24,7 +24,7 @@
               </span>
               <h1 id="market-title" class="text-xs font-medium text-zinc-300">上金所 Au99.99 黄金大盘价</h1>
               <span :class="['border px-1.5 py-0.5 text-[10px]', quoteSource === 'real' ? 'border-emerald-500/40 text-emerald-300' : 'border-amber-500/40 text-amber-300']">
-                {{ quoteSource === 'real' ? '实时行情' : '手动报价' }}
+                {{ quoteSource === 'real' ? '实时行情' : '行情暂不可用' }}
               </span>
             </div>
             <div class="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -34,13 +34,9 @@
             <p class="mt-2 text-[11px] text-zinc-500">{{ quoteSourceLabel }}<span v-if="updatedAt"> · 更新 {{ updatedAt }}</span></p>
             <p v-if="quoteError" class="mt-1 text-xs text-rose-300">行情暂不可用：{{ quoteError }}</p>
           </div>
-          <div class="flex items-center gap-2 self-center">
-            <button type="button" class="border border-zinc-700 px-3 py-2 text-xs font-mono text-zinc-200 transition hover:border-amber-400/60 hover:text-amber-200 disabled:opacity-50" :disabled="isRefreshing" aria-label="金价减一元" @click="adjustPrice(-1)">−1</button>
-            <button type="button" class="border border-zinc-700 px-3 py-2 text-xs font-mono text-zinc-200 transition hover:border-amber-400/60 hover:text-amber-200 disabled:opacity-50" :disabled="isRefreshing" aria-label="金价加一元" @click="adjustPrice(1)">+1</button>
-            <button type="button" class="grid h-9 w-9 place-items-center border border-amber-500/40 text-amber-300 transition hover:bg-amber-400/10 disabled:opacity-50" :disabled="isRefreshing" :aria-label="isRefreshing ? '正在刷新行情' : '刷新行情'" title="刷新行情" @click="refreshGoldPrice">
-              <svg :class="['h-4 w-4', isRefreshing ? 'animate-spin' : '']" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7v5h-5M4 17v-5h5m10-1a7 7 0 0 0-12.9-3M5 13a7 7 0 0 0 12.9 3" /></svg>
-            </button>
-          </div>
+          <button type="button" class="grid h-9 w-9 shrink-0 place-items-center border border-amber-500/40 text-amber-300 transition hover:bg-amber-400/10 disabled:opacity-50" :disabled="isRefreshing" :aria-label="isRefreshing ? '正在刷新行情' : '刷新行情'" title="刷新行情" @click="refreshGoldPrice">
+            <svg :class="['h-4 w-4', isRefreshing ? 'animate-spin' : '']" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7v5h-5M4 17v-5h5m10-1a7 7 0 0 0-12.9-3M5 13a7 7 0 0 0 12.9 3" /></svg>
+          </button>
         </div>
       </section>
 
@@ -74,26 +70,26 @@
             <span class="mt-auto flex items-center gap-1 pt-4 text-xs text-amber-300">查看预留页 <span aria-hidden="true">→</span></span>
           </RouterLink>
 
-          <button type="button" class="group flex min-h-40 flex-col border border-zinc-800 bg-[#141519] p-4 text-left transition hover:border-amber-500/35 hover:bg-[#17171a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400" @click="showComingSoon">
+          <RouterLink to="/copywriter" class="group flex min-h-40 flex-col border border-zinc-800 bg-[#141519] p-4 text-left transition hover:border-amber-500/35 hover:bg-[#17171a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400">
             <div class="flex items-start justify-between gap-3"><span class="grid h-9 w-9 place-items-center border border-zinc-700 bg-zinc-800/60 text-amber-300" aria-hidden="true"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1m-8.6 8.6-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg></span><span class="border border-rose-400/40 px-2 py-1 text-[10px] font-semibold uppercase text-rose-300">HOT</span></div>
             <h3 class="mt-4 text-sm font-semibold text-zinc-100 group-hover:text-amber-100">AI 朋友圈文案与修图</h3>
             <p class="mt-1.5 text-xs leading-5 text-zinc-400">爆款实拍图一键打光/换背景，AI 润色文案</p>
-            <span class="mt-auto flex items-center gap-1 pt-4 text-xs text-zinc-500">内测功能 <span aria-hidden="true">→</span></span>
-          </button>
+            <span class="mt-auto flex items-center gap-1 pt-4 text-xs text-amber-300">开始制作 <span aria-hidden="true">→</span></span>
+          </RouterLink>
 
-          <button type="button" class="group flex min-h-40 flex-col border border-zinc-800 bg-[#141519] p-4 text-left transition hover:border-amber-500/35 hover:bg-[#17171a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400" @click="showComingSoon">
+          <RouterLink to="/batch-share" class="group flex min-h-40 flex-col border border-zinc-800 bg-[#141519] p-4 text-left transition hover:border-amber-500/35 hover:bg-[#17171a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400">
             <div class="flex items-start justify-between gap-3"><span class="grid h-9 w-9 place-items-center border border-zinc-700 bg-zinc-800/60 text-amber-300" aria-hidden="true"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7.5h10M14 4l3.5 3.5L14 11m6 5.5H10M10 13l-3.5 3.5L10 20"/></svg></span><span class="border border-sky-400/35 px-2 py-1 text-[10px] font-medium text-sky-300">内测</span></div>
             <h3 class="mt-4 text-sm font-semibold text-zinc-100 group-hover:text-amber-100">一键搬货与多群同步</h3>
             <p class="mt-1.5 text-xs leading-5 text-zinc-400">批量抓取供应商爆款，自动加价同步</p>
-            <span class="mt-auto flex items-center gap-1 pt-4 text-xs text-zinc-500">敬请期待 <span aria-hidden="true">→</span></span>
-          </button>
+            <span class="mt-auto flex items-center gap-1 pt-4 text-xs text-amber-300">整理并生成 <span aria-hidden="true">→</span></span>
+          </RouterLink>
 
-          <button type="button" class="group flex min-h-40 flex-col border border-zinc-800 bg-[#141519] p-4 text-left transition hover:border-amber-500/35 hover:bg-[#17171a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400" @click="showComingSoon">
+          <RouterLink to="/catalog" class="group flex min-h-40 flex-col border border-zinc-800 bg-[#141519] p-4 text-left transition hover:border-amber-500/35 hover:bg-[#17171a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-400">
             <div class="flex items-start justify-between gap-3"><span class="grid h-9 w-9 place-items-center border border-zinc-700 bg-zinc-800/60 text-amber-300" aria-hidden="true"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.8" cy="10.8" r="6.8"/><path stroke-linecap="round" stroke-linejoin="round" d="m16 16 4.5 4.5M8.5 10.8h4.6m-2.3-2.3v4.6"/></svg></span><span class="border border-violet-400/35 px-2 py-1 text-[10px] font-medium text-violet-300">即将上线</span></div>
             <h3 class="mt-4 text-sm font-semibold text-zinc-100 group-hover:text-amber-100">以图搜图 / 柜台对货助手</h3>
-            <p class="mt-1.5 text-xs leading-5 text-zinc-400">拍照 0.5 秒精准查款式与柜台库存</p>
-            <span class="mt-auto flex items-center gap-1 pt-4 text-xs text-zinc-500">敬请期待 <span aria-hidden="true">→</span></span>
-          </button>
+            <p class="mt-1.5 text-xs leading-5 text-zinc-400">按款号、名称和柜台快速查库存，现场对货不靠记忆</p>
+            <span class="mt-auto flex items-center gap-1 pt-4 text-xs text-amber-300">搜索本地款库 <span aria-hidden="true">→</span></span>
+          </RouterLink>
         </div>
       </section>
 
@@ -103,9 +99,6 @@
       </footer>
     </main>
 
-    <Transition enter-active-class="transition duration-200" enter-from-class="translate-y-2 opacity-0" enter-to-class="translate-y-0 opacity-100" leave-active-class="transition duration-150" leave-from-class="translate-y-0 opacity-100" leave-to-class="translate-y-2 opacity-0">
-      <div v-if="toastVisible" class="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 border border-amber-400/30 bg-[#202126] px-4 py-3 text-sm text-zinc-100 shadow-xl" role="status" aria-live="polite">{{ toastMessage }}</div>
-    </Transition>
   </div>
 </template>
 
@@ -113,15 +106,12 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 const basePrice = ref(0);
-const quoteSource = ref('manual');
+const quoteSource = ref('unavailable');
 const updatedAt = ref('');
 const changePercent = ref(null);
 const isRefreshing = ref(false);
 const quoteError = ref('');
-const toastVisible = ref(false);
-const toastMessage = ref('');
 let refreshTimer;
-let toastTimer;
 
 const priceText = computed(() => Number(basePrice.value || 0).toFixed(2));
 const movementClass = computed(() => {
@@ -136,21 +126,7 @@ const movementLabel = computed(() => {
   if (changePercent.value === null) return '涨跌幅 --';
   return `涨跌幅 ${changePercent.value > 0 ? '+' : ''}${changePercent.value.toFixed(2)}%`;
 });
-const quoteSourceLabel = computed(() => quoteSource.value === 'real' ? '新浪财经 · Au99.99' : '等待同步行情');
-
-function showComingSoon() {
-  toastMessage.value = '该功能正在内测中，敬请期待';
-  toastVisible.value = true;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { toastVisible.value = false; }, 2600);
-}
-
-function adjustPrice(delta) {
-  basePrice.value = Math.max(0, Number((Number(basePrice.value || 0) + delta).toFixed(2)));
-  quoteSource.value = 'manual';
-  changePercent.value = null;
-  quoteError.value = '';
-}
+const quoteSourceLabel = computed(() => quoteSource.value === 'real' ? '新浪财经 · Au99.99' : '行情接口暂不可用');
 
 async function refreshGoldPrice() {
   if (isRefreshing.value) return;
@@ -167,6 +143,7 @@ async function refreshGoldPrice() {
     changePercent.value = Number.isFinite(Number(payload.changePercent)) ? Number(payload.changePercent) : null;
     updatedAt.value = payload.updatedAt ? new Intl.DateTimeFormat('zh-CN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Asia/Shanghai' }).format(new Date(payload.updatedAt)) : '';
   } catch (error) {
+    quoteSource.value = 'unavailable';
     quoteError.value = error instanceof Error ? error.message : '获取行情失败';
   } finally {
     isRefreshing.value = false;
@@ -180,6 +157,5 @@ onMounted(() => {
 
 onUnmounted(() => {
   clearInterval(refreshTimer);
-  clearTimeout(toastTimer);
 });
 </script>
